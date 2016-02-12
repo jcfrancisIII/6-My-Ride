@@ -1,20 +1,24 @@
-var autoprefixer = require('autoprefixer-core');
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
+var path = require("path");
 
 module.exports = {
     entry: {
-		app: ["./src/entry.jsx"]
+		app: ['webpack/hot/dev-server', path.resolve(__dirname, "src/entry.js")]
 	},
     output: {
-        path: "./build",
+        path: path.resolve(__dirname, "build"),
 		publicPath: "/assets/",
         filename: "bundle.js"
     },
-    module: {
+    module: { 
         loaders: [
             { test: /\.css$/, loader: "style!css" },
-            { test: /\.less$/, loader: "style!css!postcss!less" }
-			{ test: /\.js$/, exclude: /(node_modules)/, loader: "babel" },
+            { test: /\.less$/, loader: "style!css!postcss!less" },
+			{ test: /\.js$/, exclude: /(node_modules)/, loader: "babel" }
         ]
     },
-	postcss: [ autoprefixer({ browsers: ['last 2 version'] }) ],
+    postcss: function () {
+        return [autoprefixer, precss];
+    }
 };
