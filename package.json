@@ -1,10 +1,12 @@
 {
-  "name": "Portfolio-Angular",
+  "name": "Facebook-Canvas",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --content-base build/ --inline --hot",
+    "dev": "webpack-dev-server --content-base build --inline --hot",
+    "build": "set NODE_ENV=production && webpack -p && xcopy build/index.html dist/index.html",
+    "x": "xcopy \"build/index.html\" \"dist/index.html\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

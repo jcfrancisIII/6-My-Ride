@@ -26,12 +26,13 @@
             style="display: none;" 
             required
           >
-          <canvas id="carCanvas" width="500" height="200"></canvas>
+          <canvas id="carCanvas" width="500" height="500"></canvas>
+          <input type="text" ng-model="message" placeholder="Add a message">
           <button 
             id="share" 
             ng-click="share()"
           >
-            {{submit}}
+            {{shareBtn}}
           </button>
 
           <img id="testImg" src="" />
@@ -40,6 +41,7 @@
       <footer>
       </footer>
     </div>
-    <script src="./assets/bundle.js"></script>
+    <!--<script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.35.min.js"></script>-->
+    <script src="bundle.js"></script>
   </body>
 </html>

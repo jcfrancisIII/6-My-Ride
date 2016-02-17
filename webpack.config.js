@@ -2,13 +2,12 @@ var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 var path = require("path");
 
-module.exports = {
+var config = {
     entry: {
 		app: ['webpack/hot/dev-server', path.resolve(__dirname, "src/entry.js")]
 	},
     output: {
         path: path.resolve(__dirname, "build"),
-		publicPath: "/assets/",
         filename: "bundle.js"
     },
     module: { 
@@ -22,3 +21,9 @@ module.exports = {
         return [autoprefixer, precss];
     }
 };
+
+if (process.env.NODE_ENV === 'production') {
+    config.output.path = __dirname + '/dist';
+}
+
+module.exports = config;
