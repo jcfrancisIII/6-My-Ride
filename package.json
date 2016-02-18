@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base build --inline --hot",
-    "build": "set NODE_ENV=production && webpack -p && xcopy build/index.html dist/index.html",
-    "x": "xcopy \"build/index.html\" \"dist/index.html\"",
+    "build": "webpack && xcopy build\\index.html dist\\index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

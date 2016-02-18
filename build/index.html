@@ -1,10 +1,17 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
-    <meta property="og:title"              content="When Great Minds Don’t Think Alike" />
-    <meta property="og:description"        content="How much does culture influence creative thinking?" />
+    <title>My AdvoCare 6 Car</title>
+    <meta name="description" content="Post your AdvoCare 6 Car to Facebook.">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="My AdvoCare 6 Car" />
+    <meta property="og:description" content="Post the AdvoCare 6 on your car and show your support for Trevor Bayne." />
   </head>
   <body ng-app="carApp">
     <div class="main-container">
@@ -15,8 +22,19 @@
               name="canvasForm" 
               novalidate
         >
-          <label for="upload">
-            {{choose}}
+          <h1>
+            Trevor Bayne is getting in gear for the first race of the season! Upload a picture of your car door. We'll add the <em>6</em>. Then share it to AdvoCare's Facebook page.
+          </h1>
+          <canvas 
+            id="carCanvas" 
+            width="600" 
+            height="600"
+          ></canvas>
+          <label 
+            for="upload"
+            class="button"
+          >
+            {{text.choose}}
           </label>
           <input 
             type="file" 
@@ -26,13 +44,18 @@
             style="display: none;" 
             required
           >
-          <canvas id="carCanvas" width="500" height="500"></canvas>
-          <input type="text" ng-model="message" placeholder="Add a message">
+          <textarea 
+            type="text" 
+            ng-model="text.message" 
+            placeholder="{{text.placeholder}}"
+            rows="3"
+          ></textarea>
           <button 
             id="share" 
             ng-click="share()"
+            class="button"
           >
-            {{shareBtn}}
+            {{text.shareBtn}}
           </button>
 
           <img id="testImg" src="" />

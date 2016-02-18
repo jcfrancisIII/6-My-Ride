@@ -3,9 +3,9 @@ var precss = require('precss');
 var path = require("path");
 
 var config = {
-    entry: {
-		app: ['webpack/hot/dev-server', path.resolve(__dirname, "src/entry.js")]
-	},
+    entry: 
+//    path.resolve(__dirname, 'src/entry.js'),
+    {app: ['webpack/hot/dev-server', path.resolve(__dirname, "src/entry.js")]},
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "bundle.js"
@@ -22,8 +22,6 @@ var config = {
     }
 };
 
-if (process.env.NODE_ENV === 'production') {
-    config.output.path = __dirname + '/dist';
-}
+//    config.output.path = path.resolve(__dirname, 'dist');
 
 module.exports = config;
