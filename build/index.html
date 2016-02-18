@@ -23,13 +23,27 @@
               novalidate
         >
           <h1>
-            Trevor Bayne is getting in gear for the first race of the season! Upload a picture of your car door. We'll add the <em>6</em>. Then share it to AdvoCare's Facebook page.
+            6 My Car
           </h1>
           <canvas 
             id="carCanvas" 
+            class="carCanvas"
             width="600" 
             height="600"
+            ng-hide="iOS && hasFile"
           ></canvas>
+          <img 
+            class="carCanvas"
+            width="600" 
+            height="auto"
+            ng-show="iOS && hasFile"
+            src="{{canvasDataURI}}"
+          / >
+          <h2
+            ng-show="iOS && hasFile"
+          >
+            Touch and hold to download, then share on facebook with #6car.
+          </h2>
           <label 
             for="upload"
             class="button"
@@ -44,16 +58,11 @@
             style="display: none;" 
             required
           >
-          <textarea 
-            type="text" 
-            ng-model="text.message" 
-            placeholder="{{text.placeholder}}"
-            rows="3"
-          ></textarea>
           <button 
             id="share" 
             ng-click="share()"
             class="button"
+            ng-hide="iOS"
           >
             {{text.shareBtn}}
           </button>

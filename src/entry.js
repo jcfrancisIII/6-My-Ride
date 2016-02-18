@@ -1,11 +1,12 @@
 const angular = require('angular')
+const fs = require('browser-filesaver')
 
 require('normalize.css')
 require('./css/style.less')
 
 const app = angular.module('carApp', [])
 
-console.log('test app 101663753556909')
+console.log('test app 187559058274258')
 
 // make the six image
 app.service('sixImage', function() {
@@ -119,10 +120,10 @@ app.service('sixCanvas', function() {
 app.run(['$window', 'sixImage', 
   function($window, sixImage) {
 
-  // init facebook
+  /* init facebook
   $window.fbAsyncInit = function() {
     FB.init({ 
-      appId: '101663753556909',
+      appId: '187559058274258',
       status: true, 
       cookie: true, 
       xfbml: true 
@@ -140,6 +141,7 @@ app.run(['$window', 'sixImage',
     js.src = "//connect.facebook.net/en_US/all.js";
     ref.parentNode.insertBefore(js, ref);
   }(document))
+  */
 
   // draw random canvas
   var carC = document.getElementById("carCanvas")
@@ -165,25 +167,27 @@ app.directive('customOnChange', function() {
 app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImage', function($scope, $http, $window, $log, sixImage){
   
   $scope.text = {
-    choose: 'Upload or Take a Photo',
+    choose: 'Take or Upload Photo',
     placeholder: 'Send your support for Trevor and add all the hashtags you can think of!',
-    shareBtn: 'Share on ',
+    shareBtn: 'Download and share on Facebook',
     message: ''
   }
 
+  $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  $log.log($scope.iOS)
+
   $scope.hasFile = false
-
-
+  $scope.canvasDataURI = ''
 
   $scope.uploadFile = function(event){
     //set has file for share button to be sure an image was added
     $scope.hasFile = true
     //set the button to retake reupload
-    $scope.choose = 'Retake / Reupload Pic'
+    $scope.text.choose = 'Retake or Re-Upload'
     $scope.$apply()
 
     var files = event.target.files[0]
-    console.log(files)
 
     //read the uploaded file
     var reader = new FileReader()
@@ -215,6 +219,8 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
       }
 
       sixImage.img(context)
+      $scope.canvasDataURI = canvas.toDataURL()
+      $scope.$apply()
     })
 
     reader.addEventListener('load', function() {
@@ -247,7 +253,7 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
     return blob
   }
 
-  /* FB.login should work even if they already are
+  /* FB.login should work even if they already arent logged in
   $scope.loginStatus = function() {
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
@@ -260,7 +266,7 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
     })
   }
   */
-
+  /*
   $scope.share = function(e) {
     console.log($scope.canvas())
 
@@ -279,20 +285,6 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
 
         PostImageToFacebook(newBlob, accessToken, thisID, $scope.message)
 
-        /* working simple post
-        FB.api(
-          '/' + thisID + '/feed', 
-          'POST', 
-          { 
-            message: 'im back with a new canvas ' + $scope.shareBtn
-          },
-          function(response) {
-            if (response && !response.error) {
-              console.log(response)
-            }
-          }
-        )
-        */
       } else {
         console.log('failure to login')
       }
@@ -300,11 +292,6 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
 
     function PostImageToFacebook(blob, authToken, uID, msg)
     {
-      /* json format
-      var fd = {};
-      fd.message = "Photo with blob as source";
-      fd.link = blob;
-      */
       var fd = new FormData();
       fd.append('message', msg);
       fd.append('source', blob);
@@ -331,5 +318,18 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
     }
 
   } // end share function
+  */
+  $scope.share = function(e) {
+    console.log(fs)
+
+    if (!$scope.hasFile) {
+      return false
+    }
+
+    var newBlob = $scope.canvas()
+
+    fs.saveAs(newBlob, "my6car" + new Date().getTime() + ".png");
+
+  }
 
 }])

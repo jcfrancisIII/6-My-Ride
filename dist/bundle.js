@@ -45,44 +45,154 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const angular = __webpack_require__(1);
+	const fs = __webpack_require__(3);
 
-	__webpack_require__(3);
-	__webpack_require__(7);
+	__webpack_require__(6);
+	__webpack_require__(10);
 
 	const app = angular.module('carApp', []);
 
-	console.log('working');
+	console.log('test app 187559058274258');
 
-	app.run(['$window', function ($window) {
+	// make the six image
+	app.service('sixImage', function () {
+	  this.img = function (ctx) {
+	    ctx.save();
+	    ctx.translate(0, 0);
+	    ctx.beginPath();
+	    ctx.moveTo(0, 0);
+	    ctx.lineTo(600, 0);
+	    ctx.lineTo(600, 600);
+	    ctx.lineTo(0, 600);
+	    ctx.closePath();
+	    ctx.clip();
+	    ctx.translate(0, 0);
+	    ctx.translate(0, 0);
+	    ctx.scale(1, 1);
+	    ctx.translate(0, 0);
+	    ctx.strokeStyle = 'rgba(0,0,0,0)';
+	    ctx.lineCap = 'butt';
+	    ctx.lineJoin = 'miter';
+	    ctx.miterLimit = 4;
+	    ctx.save();
+	    ctx.save();
+	    ctx.fillStyle = "#0a1971";
+	    ctx.beginPath();
+	    ctx.moveTo(375.025, 244.103);
+	    ctx.bezierCurveTo(374.69599999999997, 243.983, 374.368, 243.868, 374.037, 243.75300000000001);
+	    ctx.lineTo(467.78599999999994, 172.582);
+	    ctx.lineTo(304.86299999999994, 172.25);
+	    ctx.lineTo(165.168, 282.936);
+	    ctx.lineTo(164.731, 283.29499999999996);
+	    ctx.bezierCurveTo(143.464, 301.311, 133.526, 327.32599999999996, 138.143, 352.89099999999996);
+	    ctx.bezierCurveTo(143.516, 382.645, 167.763, 405.799, 204.666, 416.41599999999994);
+	    ctx.bezierCurveTo(228.614, 423.3089999999999, 249.929, 426.65899999999993, 269.825, 426.65899999999993);
+	    ctx.bezierCurveTo(269.83, 426.65899999999993, 269.834, 426.65899999999993, 269.834, 426.65899999999993);
+	    ctx.bezierCurveTo(305.281, 426.65899999999993, 331.486, 415.67799999999994, 352.444, 404.92999999999995);
+	    ctx.bezierCurveTo(409.111, 375.87799999999993, 435.059, 331.16099999999994, 420.163, 288.227);
+	    ctx.bezierCurveTo(412.945, 267.427, 397.337, 252.168, 375.025, 244.103);
+	    ctx.closePath();
+	    ctx.moveTo(307.388, 321.719);
+	    ctx.bezierCurveTo(301.791, 327.484, 286.525, 335.061, 277.467, 335.061);
+	    ctx.bezierCurveTo(267.686, 335.017, 260.282, 333.167, 256.263, 331.445);
+	    ctx.bezierCurveTo(260.486, 326.455, 270.683, 321.045, 279.34, 318.59499999999997);
+	    ctx.bezierCurveTo(280.775, 318.42299999999994, 284.12899999999996, 318.08599999999996, 288.275, 318.08599999999996);
+	    ctx.bezierCurveTo(298.311, 318.086, 304.421, 319.989, 307.388, 321.719);
+	    ctx.closePath();
+	    ctx.fill();
+	    ctx.stroke();
+	    ctx.restore();
+	    ctx.save();
+	    ctx.fillStyle = "#ffffff";
+	    ctx.beginPath();
+	    ctx.moveTo(269.836, 415.571);
+	    ctx.bezierCurveTo(269.836, 415.571, 269.831, 415.571, 269.827, 415.571);
+	    ctx.bezierCurveTo(250.779, 415.571, 230.281, 412.336, 207.155, 405.67900000000003);
+	    ctx.bezierCurveTo(174.087, 396.163, 152.488, 376.12500000000006, 147.89600000000002, 350.69800000000004);
+	    ctx.bezierCurveTo(144.05100000000002, 329.401, 152.59500000000003, 307.504, 170.75600000000003, 292.122);
+	    ctx.lineTo(170.93800000000002, 291.97200000000004);
+	    ctx.lineTo(308.033, 183.34500000000003);
+	    ctx.lineTo(435.597, 183.60900000000004);
+	    ctx.lineTo(348.812, 249.48800000000006);
+	    ctx.bezierCurveTo(354.916, 250.10500000000005, 363.26300000000003, 251.50900000000004, 371.957, 254.65200000000004);
+	    ctx.bezierCurveTo(391.325, 261.65100000000007, 404.783, 274.64700000000005, 410.883, 292.22900000000004);
+	    ctx.bezierCurveTo(426.20599999999996, 336.38100000000003, 388.59499999999997, 374.1940000000001, 348.287, 394.862);
+	    ctx.bezierCurveTo(328.307, 405.102, 303.362, 415.571, 269.836, 415.571);
+	    ctx.closePath();
+	    ctx.moveTo(277.572, 307.657);
+	    ctx.bezierCurveTo(269.639, 309.79499999999996, 249.287, 317.79499999999996, 245.142, 330.62199999999996);
+	    ctx.bezierCurveTo(244.118, 333.78599999999994, 244.691, 335.34899999999993, 245.388, 336.45399999999995);
+	    ctx.bezierCurveTo(248.87300000000002, 342.00399999999996, 262.346, 346.08299999999997, 277.429, 346.14899999999994);
+	    ctx.bezierCurveTo(289.95399999999995, 346.14899999999994, 312.14599999999996, 335.62499999999994, 317.796, 324.85599999999994);
+	    ctx.bezierCurveTo(319.479, 321.6479999999999, 318.95799999999997, 319.71099999999996, 318.145, 318.0969999999999);
+	    ctx.bezierCurveTo(314.582, 311.04099999999994, 303.698, 306.9969999999999, 288.27599999999995, 306.9969999999999);
+	    ctx.bezierCurveTo(282.91, 306.998, 278.71, 307.504, 277.572, 307.657);
+	    ctx.closePath();
+	    ctx.fill();
+	    ctx.stroke();
+	    ctx.restore();
+	    ctx.save();
+	    ctx.fillStyle = "#ec2127";
+	    ctx.beginPath();
+	    ctx.moveTo(339.446, 256.938);
+	    ctx.lineTo(296.08500000000004, 279.933);
+	    ctx.lineTo(412.60200000000003, 191.48);
+	    ctx.lineTo(310.29600000000005, 191.271);
+	    ctx.lineTo(175.054, 298.429);
+	    ctx.bezierCurveTo(141.705, 326.678, 144.825, 379.56499999999994, 208.931, 398.01199999999994);
+	    ctx.bezierCurveTo(273.03700000000003, 416.45899999999995, 309.78200000000004, 405.881, 345.31600000000003, 387.66399999999993);
+	    ctx.bezierCurveTo(382.274, 368.7149999999999, 418.011, 334.72599999999994, 404.25500000000005, 295.08399999999995);
+	    ctx.bezierCurveTo(390.501, 255.44, 339.446, 256.938, 339.446, 256.938);
+	    ctx.closePath();
+	    ctx.moveTo(277.399, 354.067);
+	    ctx.bezierCurveTo(259.081, 353.986, 231.995, 347.94100000000003, 238.457, 327.94);
+	    ctx.bezierCurveTo(244.917, 307.936, 276.304, 299.853, 276.304, 299.853);
+	    ctx.bezierCurveTo(276.304, 299.853, 314.15999999999997, 294.043, 324.34, 314.214);
+	    ctx.bezierCurveTo(334.519, 334.383, 295.716, 354.152, 277.399, 354.067);
+	    ctx.closePath();
+	    ctx.fill();
+	    ctx.stroke();
+	    ctx.restore();
+	    ctx.restore();
+	    ctx.restore();
+	  };
+	});
 
-	  // init facebook
-	  $window.fbAsyncInit = function () {
-	    FB.init({
-	      appId: '101663366890281',
-	      status: true,
-	      cookie: true,
-	      xfbml: true
+	// make window measurement
+	app.service('sixCanvas', function () {
+	  this.Width = document.getElementById('carCanvas').clientWidth;
+	});
+
+	app.run(['$window', 'sixImage', function ($window, sixImage) {
+
+	  /* init facebook
+	  $window.fbAsyncInit = function() {
+	    FB.init({ 
+	      appId: '187559058274258',
+	      status: true, 
+	      cookie: true, 
+	      xfbml: true 
 	    });
 	  };
-
-	  (function (d) {
-	    var js,
-	        id = 'facebook-jssdk',
-	        ref = d.getElementsByTagName('script')[0];
-	    if (d.getElementById(id)) {
-	      return;
-	    }
-	    js = d.createElement('script');
-	    js.id = id;
+	   (function(d){
+	    var js, 
+	    id = 'facebook-jssdk', 
+	    ref = d.getElementsByTagName('script')[0];
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement('script'); 
+	    js.id = id; 
 	    js.async = true;
 	    js.src = "//connect.facebook.net/en_US/all.js";
 	    ref.parentNode.insertBefore(js, ref);
-	  })(document);
+	  }(document))
+	  */
 
 	  // draw random canvas
 	  var carC = document.getElementById("carCanvas");
 	  var ctx = carC.getContext("2d");
-	  drawSix(ctx);
+	  ctx.fillStyle = 'white';
+	  ctx.fillRect(0, 0, carC.width, carC.height);
+	  sixImage.img(ctx);
 	}]);
 
 	// Check for changes to the upload
@@ -97,24 +207,63 @@
 	});
 
 	// Form controller
-	app.controller('FormController', ['$scope', '$http', function ($scope, $http) {
+	app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImage', function ($scope, $http, $window, $log, sixImage) {
 
-	  $scope.choose = 'Take Pic/Choose Pic';
-	  $scope.file = null;
+	  $scope.text = {
+	    choose: 'Take or Upload Photo',
+	    placeholder: 'Send your support for Trevor and add all the hashtags you can think of!',
+	    shareBtn: 'Download and share on Facebook',
+	    message: ''
+	  };
+
+	  $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+	  $log.log($scope.iOS);
+
+	  $scope.hasFile = false;
+	  $scope.canvasDataURI = '';
 
 	  $scope.uploadFile = function (event) {
+	    //set has file for share button to be sure an image was added
+	    $scope.hasFile = true;
+	    //set the button to retake reupload
+	    $scope.text.choose = 'Retake or Re-Upload';
+	    $scope.$apply();
+
 	    var files = event.target.files[0];
-	    console.log(files);
+
+	    //read the uploaded file
 	    var reader = new FileReader();
 
 	    var canvas = document.getElementById('carCanvas');
 	    var context = canvas.getContext('2d');
+	    //draw uploaded file
 	    var imageObj = new Image();
 
 	    imageObj.addEventListener('load', function () {
-	      context.clearRect(0, 0, canvas.width, canvas.height);
-	      context.drawImage(this, 0, 0);
-	      drawSix(context);
+	      var imgW = this.width;
+	      var imgH = this.height;
+	      var ratio = imgW / imgH;
+	      var canW = canvas.width;
+
+	      var moreImgW = 0;
+	      var moreImgH = 0;
+
+	      context.clearRect(0, 0, canW, canW);
+
+	      if (imgW === imgH) {
+	        context.drawImage(this, 0, 0, canW, canW);
+	      } else if (imgW > imgH) {
+	        moreImgW = canW * ratio;
+	        context.drawImage(this, canW / 2 - moreImgW / 2, 0, moreImgW, canW);
+	      } else if (imgW < imgH) {
+	        moreImgH = canW / ratio;
+	        context.drawImage(this, 0, canW / 2 - moreImgH / 2, canW, moreImgH);
+	      }
+
+	      sixImage.img(context);
+	      $scope.canvasDataURI = canvas.toDataURL();
+	      $scope.$apply();
 	    });
 
 	    reader.addEventListener('load', function () {
@@ -146,184 +295,75 @@
 	    return blob;
 	  };
 
-	  $scope.shareBtn = 'Share photo to Facebook';
-	  $scope.message = '';
-
-	  $scope.loginStatus = function () {
-	    FB.getLoginStatus(function (response) {
+	  /* FB.login should work even if they already arent logged in
+	  $scope.loginStatus = function() {
+	    FB.getLoginStatus(function(response) {
 	      if (response.status === 'connected') {
-	        console.log('login status response: ' + JSON.stringify(response));
-	        var accessToken = response.authResponse.accessToken;
-	        return accessToken;
+	        console.log('login status response: ' + JSON.stringify(response))
+	        var accessToken = response.authResponse.accessToken
+	        return accessToken
 	      } else {
-	        return null;
+	        return null
 	      }
-	    });
-	  };
-
-	  $scope.share = function (e) {
-	    console.log($scope.canvas());
-	    console.log($scope.loginStatus());
-
-	    var newBlob = $scope.canvas();
-
-	    FB.login(function (response) {
+	    })
+	  }
+	  */
+	  /*
+	  $scope.share = function(e) {
+	    console.log($scope.canvas())
+	     if (!$scope.hasFile) {
+	      return false
+	    }
+	     var newBlob = $scope.canvas()
+	     FB.login(function(response){
 	      if (response.authResponse) {
-	        var accessToken = FB.getAuthResponse().accessToken;
-	        console.log('got access userid: ' + JSON.stringify(response.authResponse.userID));
-	        console.log('got access userid: ' + JSON.stringify(response.authResponse.userID));
-
-	        var thisID = response.authResponse.userID;
-
-	        PostImageToFacebook(newBlob, accessToken, thisID, $scope.message);
-
-	        /* working simple post
-	        FB.api(
-	          '/' + thisID + '/feed', 
-	          'POST', 
-	          { 
-	            message: 'im back with a new canvas ' + $scope.shareBtn
-	          },
-	          function(response) {
-	            if (response && !response.error) {
-	              console.log(response)
-	            }
-	          }
-	        )
-	        */
-	      } else {
-	          console.log('failure to login');
-	        }
-	    }, { scope: 'publish_actions' });
-
-	    function PostImageToFacebook(blob, authToken, uID, msg) {
-	      /* json format
-	      var fd = {};
-	      fd.message = "Photo with blob as source";
-	      fd.link = blob;
-	      */
+	        var accessToken = FB.getAuthResponse().accessToken
+	        console.log('got access userid: ' + JSON.stringify(response.authResponse.userID) )
+	         var thisID = response.authResponse.userID
+	         PostImageToFacebook(newBlob, accessToken, thisID, $scope.message)
+	       } else {
+	        console.log('failure to login')
+	      }
+	    }, {scope: 'publish_actions'})
+	     function PostImageToFacebook(blob, authToken, uID, msg)
+	    {
 	      var fd = new FormData();
 	      fd.append('message', msg);
 	      fd.append('source', blob);
-	      try {
-	        console.log('toekn: ' + JSON.stringify(authToken));
-	        console.log(blob);
-	        console.log('form data: ' + fd);
-	        $http.post("https://graph.facebook.com/" + uID + "/photos?access_token=" + authToken, fd, {
-	          transformRequest: angular.identity,
-	          headers: { 'Content-Type': undefined }
-	        }).then(function (data) {
-	          console.log('success data: ' + JSON.stringify(data));
-	        }, function (data) {
-	          console.log('failure data: ' + JSON.stringify(data));
-	        });
-	      } catch (e) {
-	        console.log(e);
+	      try{
+	        console.log('toekn: ' + JSON.stringify(authToken))
+	        console.log(blob)
+	        console.log('form data: ' + fd)
+	        $http.post("https://graph.facebook.com/testspaceasdf/photos?access_token=" + authToken, fd,
+	          {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	          }).then(
+	            function(data) {
+	              console.log('success data: ' + JSON.stringify(data))
+	            }, 
+	            function(data) {
+	              console.log('failure data: ' + JSON.stringify(data))
+	            }
+	          )
+	       } catch(e) {
+	        console.log(e)
 	      }
 	    }
-	  }; // end share function
-	}]);
+	   } // end share function
+	  */
+	  $scope.share = function (e) {
+	    console.log(fs);
 
-	function drawSix(ctx) {
-	  ctx.save();
-	  ctx.translate(0, 0);
-	  ctx.beginPath();
-	  ctx.moveTo(0, 0);
-	  ctx.lineTo(612, 0);
-	  ctx.lineTo(612, 792);
-	  ctx.lineTo(0, 792);
-	  ctx.closePath();
-	  ctx.clip();
-	  ctx.translate(0, 0);
-	  ctx.translate(0, 0);
-	  ctx.scale(1, 1);
-	  ctx.translate(0, 0);
-	  ctx.strokeStyle = 'rgba(0,0,0,0)';
-	  ctx.lineCap = 'butt';
-	  ctx.lineJoin = 'miter';
-	  ctx.miterLimit = 4;
-	  ctx.save();
-	  ctx.save();
-	  ctx.fillStyle = "#100b0c";
-	  ctx.beginPath();
-	  ctx.moveTo(409.545, 324.598);
-	  ctx.bezierCurveTo(409.081, 324.447, 408.619, 324.302, 408.15500000000003, 324.156);
-	  ctx.lineTo(540.0120000000001, 234.335);
-	  ctx.lineTo(310.86100000000005, 233.917);
-	  ctx.lineTo(114.38, 373.607);
-	  ctx.lineTo(113.765, 374.059);
-	  ctx.bezierCurveTo(83.85300000000001, 396.79600000000005, 69.875, 429.627, 76.368, 461.89200000000005);
-	  ctx.bezierCurveTo(83.92599999999999, 499.44300000000004, 118.029, 528.6650000000001, 169.934, 542.066);
-	  ctx.bezierCurveTo(203.618, 550.765, 233.59699999999998, 554.993, 261.581, 554.993);
-	  ctx.bezierCurveTo(261.587, 554.993, 261.593, 554.993, 261.593, 554.993);
-	  ctx.bezierCurveTo(311.449, 554.993, 348.308, 541.134, 377.785, 527.572);
-	  ctx.bezierCurveTo(457.487, 490.905, 493.983, 434.47, 473.03200000000004, 380.28499999999997);
-	  ctx.bezierCurveTo(462.879, 354.034, 440.926, 334.776, 409.545, 324.598);
-	  ctx.closePath();
-	  ctx.moveTo(314.411, 422.552);
-	  ctx.bezierCurveTo(306.539, 429.829, 285.068, 439.391, 272.328, 439.391);
-	  ctx.bezierCurveTo(258.57099999999997, 439.336, 248.15699999999998, 437.002, 242.50399999999996, 434.82800000000003);
-	  ctx.bezierCurveTo(248.44399999999996, 428.53000000000003, 262.787, 421.701, 274.96299999999997, 418.61);
-	  ctx.bezierCurveTo(276.97999999999996, 418.394, 281.69699999999995, 417.968, 287.53, 417.968);
-	  ctx.bezierCurveTo(301.645, 417.969, 310.238, 420.37, 314.411, 422.552);
-	  ctx.closePath();
-	  ctx.fill();
-	  ctx.stroke();
-	  ctx.restore();
-	  ctx.save();
-	  ctx.fillStyle = "#ffffff";
-	  ctx.beginPath();
-	  ctx.moveTo(261.595, 541);
-	  ctx.bezierCurveTo(261.595, 541, 261.588, 541, 261.58200000000005, 541);
-	  ctx.bezierCurveTo(234.79200000000006, 541, 205.96000000000004, 536.916, 173.43400000000005, 528.516);
-	  ctx.bezierCurveTo(126.92300000000006, 516.5079999999999, 96.54400000000005, 491.21799999999996, 90.08500000000005, 459.12799999999993);
-	  ctx.bezierCurveTo(84.67600000000004, 432.2489999999999, 96.69300000000005, 404.61299999999994, 122.23700000000005, 385.2009999999999);
-	  ctx.lineTo(122.49200000000005, 385.0109999999999);
-	  ctx.lineTo(315.3190000000001, 247.91799999999992);
-	  ctx.lineTo(494.73800000000006, 248.24999999999991);
-	  ctx.lineTo(372.67500000000007, 331.3939999999999);
-	  ctx.bezierCurveTo(381.25900000000007, 332.1729999999999, 392.9990000000001, 333.9439999999999, 405.2270000000001, 337.9109999999999);
-	  ctx.bezierCurveTo(432.46600000000007, 346.7439999999999, 451.3980000000001, 363.14499999999987, 459.9770000000001, 385.33499999999987);
-	  ctx.bezierCurveTo(481.5290000000001, 441.0579999999999, 428.62700000000007, 488.77999999999986, 371.93500000000006, 514.8619999999999);
-	  ctx.bezierCurveTo(343.833, 527.786, 308.748, 541, 261.595, 541);
-	  ctx.closePath();
-	  ctx.moveTo(272.477, 404.807);
-	  ctx.bezierCurveTo(261.31899999999996, 407.505, 232.69199999999998, 417.601, 226.86299999999997, 433.79);
-	  ctx.bezierCurveTo(225.42299999999997, 437.783, 226.22999999999996, 439.754, 227.20799999999997, 441.15000000000003);
-	  ctx.bezierCurveTo(232.10999999999996, 448.15500000000003, 251.05999999999997, 453.30100000000004, 272.27299999999997, 453.38500000000005);
-	  ctx.bezierCurveTo(289.89, 453.38500000000005, 321.10299999999995, 440.10200000000003, 329.049, 426.51300000000003);
-	  ctx.bezierCurveTo(331.417, 422.463, 330.68399999999997, 420.021, 329.53999999999996, 417.98300000000006);
-	  ctx.bezierCurveTo(324.53, 409.08000000000004, 309.22099999999995, 403.97300000000007, 287.52899999999994, 403.97300000000007);
-	  ctx.bezierCurveTo(279.984, 403.974, 274.078, 404.613, 272.477, 404.807);
-	  ctx.closePath();
-	  ctx.fill();
-	  ctx.stroke();
-	  ctx.restore();
-	  ctx.save();
-	  ctx.fillStyle = "#ec2127";
-	  ctx.beginPath();
-	  ctx.moveTo(359.503, 340.796);
-	  ctx.lineTo(298.514, 369.817);
-	  ctx.lineTo(462.395, 258.185);
-	  ctx.lineTo(318.50199999999995, 257.92);
-	  ctx.lineTo(128.28199999999995, 393.16);
-	  ctx.bezierCurveTo(81.37799999999996, 428.812, 85.76499999999996, 495.56000000000006, 175.93099999999995, 518.84);
-	  ctx.bezierCurveTo(266.097, 542.12, 317.779, 528.77, 367.756, 505.78000000000003);
-	  ctx.bezierCurveTo(419.739, 481.865, 470.00399999999996, 438.96900000000005, 450.65599999999995, 388.93800000000005);
-	  ctx.bezierCurveTo(431.30799999999994, 338.90700000000004, 359.503, 340.796, 359.503, 340.796);
-	  ctx.closePath();
-	  ctx.moveTo(272.232, 463.38);
-	  ctx.bezierCurveTo(246.46800000000002, 463.277, 208.372, 455.64799999999997, 217.46000000000004, 430.403);
-	  ctx.bezierCurveTo(226.54600000000005, 405.159, 270.69100000000003, 394.957, 270.69100000000003, 394.957);
-	  ctx.bezierCurveTo(270.69100000000003, 394.957, 323.93600000000004, 387.625, 338.25200000000007, 413.082);
-	  ctx.bezierCurveTo(352.573, 438.537, 297.995, 463.486, 272.232, 463.38);
-	  ctx.closePath();
-	  ctx.fill();
-	  ctx.stroke();
-	  ctx.restore();
-	  ctx.restore();
-	  ctx.restore();
-	}
+	    if (!$scope.hasFile) {
+	      return false;
+	    }
+
+	    var newBlob = $scope.canvas();
+
+	    fs.saveAs(newBlob, "my6car" + new Date().getTime() + ".png");
+	  };
+	}]);
 
 /***/ },
 /* 1 */
@@ -30770,13 +30810,290 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
+	 * A saveAs() FileSaver implementation.
+	 * 1.1.20150716
+	 *
+	 * By Eli Grey, http://eligrey.com
+	 * License: X11/MIT
+	 *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+	 */
+
+	/*global self */
+	/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
+
+	/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+
+	var saveAs = saveAs || (function(view) {
+		"use strict";
+		// IE <10 is explicitly unsupported
+		if (typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
+			return;
+		}
+		var
+			  doc = view.document
+			  // only get URL when necessary in case Blob.js hasn't overridden it yet
+			, get_URL = function() {
+				return view.URL || view.webkitURL || view;
+			}
+			, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+			, can_use_save_link = "download" in save_link
+			, click = function(node) {
+				var event = new MouseEvent("click");
+				node.dispatchEvent(event);
+			}
+			, webkit_req_fs = view.webkitRequestFileSystem
+			, req_fs = view.requestFileSystem || webkit_req_fs || view.mozRequestFileSystem
+			, throw_outside = function(ex) {
+				(view.setImmediate || view.setTimeout)(function() {
+					throw ex;
+				}, 0);
+			}
+			, force_saveable_type = "application/octet-stream"
+			, fs_min_size = 0
+			// See https://code.google.com/p/chromium/issues/detail?id=375297#c7 and
+			// https://github.com/eligrey/FileSaver.js/commit/485930a#commitcomment-8768047
+			// for the reasoning behind the timeout and revocation flow
+			, arbitrary_revoke_timeout = 500 // in ms
+			, revoke = function(file) {
+				var revoker = function() {
+					if (typeof file === "string") { // file is an object URL
+						get_URL().revokeObjectURL(file);
+					} else { // file is a File
+						file.remove();
+					}
+				};
+				if (view.chrome) {
+					revoker();
+				} else {
+					setTimeout(revoker, arbitrary_revoke_timeout);
+				}
+			}
+			, dispatch = function(filesaver, event_types, event) {
+				event_types = [].concat(event_types);
+				var i = event_types.length;
+				while (i--) {
+					var listener = filesaver["on" + event_types[i]];
+					if (typeof listener === "function") {
+						try {
+							listener.call(filesaver, event || filesaver);
+						} catch (ex) {
+							throw_outside(ex);
+						}
+					}
+				}
+			}
+			, auto_bom = function(blob) {
+				// prepend BOM for UTF-8 XML and text/* types (including HTML)
+				if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+					return new Blob(["\ufeff", blob], {type: blob.type});
+				}
+				return blob;
+			}
+			, FileSaver = function(blob, name, no_auto_bom) {
+				if (!no_auto_bom) {
+					blob = auto_bom(blob);
+				}
+				// First try a.download, then web filesystem, then object URLs
+				var
+					  filesaver = this
+					, type = blob.type
+					, blob_changed = false
+					, object_url
+					, target_view
+					, dispatch_all = function() {
+						dispatch(filesaver, "writestart progress write writeend".split(" "));
+					}
+					// on any filesys errors revert to saving with object URLs
+					, fs_error = function() {
+						// don't create more object URLs than needed
+						if (blob_changed || !object_url) {
+							object_url = get_URL().createObjectURL(blob);
+						}
+						if (target_view) {
+							target_view.location.href = object_url;
+						} else {
+							var new_tab = view.open(object_url, "_blank");
+							if (new_tab == undefined && typeof safari !== "undefined") {
+								//Apple do not allow window.open, see http://bit.ly/1kZffRI
+								view.location.href = object_url
+							}
+						}
+						filesaver.readyState = filesaver.DONE;
+						dispatch_all();
+						revoke(object_url);
+					}
+					, abortable = function(func) {
+						return function() {
+							if (filesaver.readyState !== filesaver.DONE) {
+								return func.apply(this, arguments);
+							}
+						};
+					}
+					, create_if_not_found = {create: true, exclusive: false}
+					, slice
+				;
+				filesaver.readyState = filesaver.INIT;
+				if (!name) {
+					name = "download";
+				}
+				if (can_use_save_link) {
+					object_url = get_URL().createObjectURL(blob);
+					save_link.href = object_url;
+					save_link.download = name;
+					setTimeout(function() {
+						click(save_link);
+						dispatch_all();
+						revoke(object_url);
+						filesaver.readyState = filesaver.DONE;
+					});
+					return;
+				}
+				// Object and web filesystem URLs have a problem saving in Google Chrome when
+				// viewed in a tab, so I force save with application/octet-stream
+				// http://code.google.com/p/chromium/issues/detail?id=91158
+				// Update: Google errantly closed 91158, I submitted it again:
+				// https://code.google.com/p/chromium/issues/detail?id=389642
+				if (view.chrome && type && type !== force_saveable_type) {
+					slice = blob.slice || blob.webkitSlice;
+					blob = slice.call(blob, 0, blob.size, force_saveable_type);
+					blob_changed = true;
+				}
+				// Since I can't be sure that the guessed media type will trigger a download
+				// in WebKit, I append .download to the filename.
+				// https://bugs.webkit.org/show_bug.cgi?id=65440
+				if (webkit_req_fs && name !== "download") {
+					name += ".download";
+				}
+				if (type === force_saveable_type || webkit_req_fs) {
+					target_view = view;
+				}
+				if (!req_fs) {
+					fs_error();
+					return;
+				}
+				fs_min_size += blob.size;
+				req_fs(view.TEMPORARY, fs_min_size, abortable(function(fs) {
+					fs.root.getDirectory("saved", create_if_not_found, abortable(function(dir) {
+						var save = function() {
+							dir.getFile(name, create_if_not_found, abortable(function(file) {
+								file.createWriter(abortable(function(writer) {
+									writer.onwriteend = function(event) {
+										target_view.location.href = file.toURL();
+										filesaver.readyState = filesaver.DONE;
+										dispatch(filesaver, "writeend", event);
+										revoke(file);
+									};
+									writer.onerror = function() {
+										var error = writer.error;
+										if (error.code !== error.ABORT_ERR) {
+											fs_error();
+										}
+									};
+									"writestart progress write abort".split(" ").forEach(function(event) {
+										writer["on" + event] = filesaver["on" + event];
+									});
+									writer.write(blob);
+									filesaver.abort = function() {
+										writer.abort();
+										filesaver.readyState = filesaver.DONE;
+									};
+									filesaver.readyState = filesaver.WRITING;
+								}), fs_error);
+							}), fs_error);
+						};
+						dir.getFile(name, {create: false}, abortable(function(file) {
+							// delete file if it already exists
+							file.remove();
+							save();
+						}), abortable(function(ex) {
+							if (ex.code === ex.NOT_FOUND_ERR) {
+								save();
+							} else {
+								fs_error();
+							}
+						}));
+					}), fs_error);
+				}), fs_error);
+			}
+			, FS_proto = FileSaver.prototype
+			, saveAs = function(blob, name, no_auto_bom) {
+				return new FileSaver(blob, name, no_auto_bom);
+			}
+		;
+		// IE 10+ (native saveAs)
+		if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+			return function(blob, name, no_auto_bom) {
+				if (!no_auto_bom) {
+					blob = auto_bom(blob);
+				}
+				return navigator.msSaveOrOpenBlob(blob, name || "download");
+			};
+		}
+
+		FS_proto.abort = function() {
+			var filesaver = this;
+			filesaver.readyState = filesaver.DONE;
+			dispatch(filesaver, "abort");
+		};
+		FS_proto.readyState = FS_proto.INIT = 0;
+		FS_proto.WRITING = 1;
+		FS_proto.DONE = 2;
+
+		FS_proto.error =
+		FS_proto.onwritestart =
+		FS_proto.onprogress =
+		FS_proto.onwrite =
+		FS_proto.onabort =
+		FS_proto.onerror =
+		FS_proto.onwriteend =
+			null;
+
+		return saveAs;
+	}(
+		   typeof self !== "undefined" && self
+		|| typeof window !== "undefined" && window
+		|| this.content
+	));
+	// `self` is undefined in Firefox for Android content script context
+	// while `this` is nsIContentFrameMessageManager
+	// with an attribute `content` that corresponds to the window
+
+	if (typeof module !== "undefined" && module.exports) {
+	  module.exports.saveAs = saveAs;
+	} else if (("function" !== "undefined" && __webpack_require__(4) !== null) && (__webpack_require__(5) != null)) {
+	  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	    return saveAs;
+	  }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	}
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = function() { throw new Error("define cannot be used indirect"); };
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(4);
+	var content = __webpack_require__(7);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
+	var update = __webpack_require__(9)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -30793,10 +31110,10 @@
 	}
 
 /***/ },
-/* 4 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(5)();
+	exports = module.exports = __webpack_require__(8)();
 	// imports
 
 
@@ -30807,7 +31124,7 @@
 
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/*
@@ -30863,7 +31180,7 @@
 
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -31117,16 +31434,16 @@
 
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(8);
+	var content = __webpack_require__(11);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
+	var update = __webpack_require__(9)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -31143,15 +31460,15 @@
 	}
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(5)();
+	exports = module.exports = __webpack_require__(8)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "div {\n  background: rgba(150, 150, 150, 0.5);\n}\n.main-container nav {\n  width: 100%;\n  height: 100px;\n  display: block;\n}\n.main-container footer {\n  width: 100%;\n  height: 100px;\n}\n", ""]);
+	exports.push([module.id, "::-moz-selection {\n  background: #b3d4fc;\n  text-shadow: none;\n}\n::selection {\n  background: #b3d4fc;\n  text-shadow: none;\n}\n* {\n  box-sizing: border-box;\n}\nbody {\n  font-size: 28px;\n  margin: 0;\n  background: #6bc4ea;\n  color: #0a1971;\n  font-family: 'Open Sans', Arial, Helvetica, sans-serif;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\ninput {\n  -webkit-appearance: none;\n  border-radius: 0;\n}\nbutton, input, textarea {\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n.main-container .content {\n  width: 100%;\n  max-width: 680px;\n  margin: 0 auto;\n  text-align: center;\n  padding: 0 15px 2em;\n}\n.main-container .content h1 {\n  font-size: inherit;\n  color: #fff;\n  font-weight: 400;\n  margin: 2em 0 1em;\n}\n@media screen and (max-width: 400px) {\n  .main-container .content h1 {\n    margin: 0.5em 0;\n  }\n}\n.main-container .content h2 {\n  font-size: 14px;\n  font-wieght: 400;\n}\n.main-container .content .carCanvas {\n  max-width: 100%;\n}\n.main-container .content textarea {\n  display: block;\n  position: relative;\n  width: 100%;\n  max-width: 600px;\n  margin: 0 auto;\n  height: auto;\n  padding: 6px 12px;\n  line-height: 1.42857143;\n  color: #000;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;\n}\n.main-container .content textarea:focus {\n  border-color: #66afe9;\n  outline: 0;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(10, 25, 113, 0.6);\n}\n.main-container .content .button, .main-container .content button.button, .main-container .content label.button {\n  display: block;\n  font-weight: 700;\n  border: 3px solid #ffffff;\n  background: #ec2126;\n  padding: 0.4em;\n  width: 100%;\n  border-radius: 14px;\n  margin: 1em 0;\n  cursor: pointer;\n}\n@media screen and (max-width: 400px) {\n  .main-container .content .button, .main-container .content button.button, .main-container .content label.button {\n    margin: 0.5em 0;\n    font-size: 16px;\n  }\n}\n", ""]);
 
 	// exports
 

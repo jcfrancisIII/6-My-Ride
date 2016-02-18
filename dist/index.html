@@ -1,10 +1,17 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:url"                content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
-    <meta property="og:title"              content="When Great Minds Don’t Think Alike" />
-    <meta property="og:description"        content="How much does culture influence creative thinking?" />
+    <title>My AdvoCare 6 Car</title>
+    <meta name="description" content="Post your AdvoCare 6 Car to Facebook.">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="My AdvoCare 6 Car" />
+    <meta property="og:description" content="Post the AdvoCare 6 on your car and show your support for Trevor Bayne." />
   </head>
   <body ng-app="carApp">
     <div class="main-container">
@@ -15,8 +22,33 @@
               name="canvasForm" 
               novalidate
         >
-          <label for="upload">
-            {{choose}}
+          <h1>
+            6 My Car
+          </h1>
+          <canvas 
+            id="carCanvas" 
+            class="carCanvas"
+            width="600" 
+            height="600"
+            ng-hide="iOS && hasFile"
+          ></canvas>
+          <img 
+            class="carCanvas"
+            width="600" 
+            height="auto"
+            ng-show="iOS && hasFile"
+            src="{{canvasDataURI}}"
+          / >
+          <h2
+            ng-show="iOS && hasFile"
+          >
+            Touch and hold to download, then share on facebook with #6car.
+          </h2>
+          <label 
+            for="upload"
+            class="button"
+          >
+            {{text.choose}}
           </label>
           <input 
             type="file" 
@@ -26,13 +58,13 @@
             style="display: none;" 
             required
           >
-          <canvas id="carCanvas" width="500" height="500"></canvas>
-          <input type="text" ng-model="message" placeholder="Add a message">
           <button 
             id="share" 
             ng-click="share()"
+            class="button"
+            ng-hide="iOS"
           >
-            {{shareBtn}}
+            {{text.shareBtn}}
           </button>
 
           <img id="testImg" src="" />

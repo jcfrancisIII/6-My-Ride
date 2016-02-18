@@ -2,6 +2,10 @@
 @darkblue: #0a1971; 
 @red: #ec2126;
 
+.smallScreen(@rules) {
+  @media screen and (max-width: 400px) { @rules(); }
+}
+
 ::selection {
     background: #b3d4fc;
     text-shadow: none;
@@ -14,7 +18,7 @@
 }
 
 body {
-  font-size: 24px;
+  font-size: 28px;
   margin: 0;
   background: @lightblue;
   color: @darkblue;
@@ -40,16 +44,24 @@ button, input, textarea {
     max-width: 680px;
     margin: 0 auto;
     text-align: center;
-    padding: 0 15px 3em;
+    padding: 0 15px 2em;
 
     h1 {
       font-size: inherit;
       color: #fff;
       font-weight: 400;
-      margin: 3em 0 1em;
+      margin: 2em 0 1em;
+      .smallScreen({
+        margin: 0.5em 0;
+      })
     }
 
-    #carCanvas {
+    h2 {
+      font-size: 14px;
+      font-wieght: 400;
+    }
+
+    .carCanvas {
       max-width: 100%;
     }
 
@@ -81,11 +93,15 @@ button, input, textarea {
       font-weight: 700;
       border: 3px solid rgba(255, 255, 255, 1);
       background: @red;
-      padding: 0.6em;
+      padding: 0.4em;
       width: 100%;
       border-radius: 14px;
       margin: 1em 0;
       cursor: pointer;
+      .smallScreen({
+        margin: 0.5em 0;
+        font-size: 16px;
+      })
     }
 
   }

@@ -4,8 +4,8 @@ var path = require("path");
 
 var config = {
     entry: 
-//    path.resolve(__dirname, 'src/entry.js'),
-    {app: ['webpack/hot/dev-server', path.resolve(__dirname, "src/entry.js")]},
+    path.resolve(__dirname, 'src/entry.js'),
+//    {app: ['webpack/hot/dev-server', path.resolve(__dirname, "src/entry.js")]},
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "bundle.js"
@@ -21,7 +21,6 @@ var config = {
         return [autoprefixer, precss];
     }
 };
-
-//    config.output.path = path.resolve(__dirname, 'dist');
+    config.output.path = path.resolve(__dirname, 'dist');
 
 module.exports = config;

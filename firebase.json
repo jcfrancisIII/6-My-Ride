@@ -1,5 +1,5 @@
 {
-  "firebase": "advocare6car",
+  "firebase": "6car",
   "public": "dist",
   "ignore": [
     "firebase.json",
