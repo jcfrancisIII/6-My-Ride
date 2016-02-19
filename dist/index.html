@@ -7,24 +7,31 @@
     <title>My AdvoCare 6 Car</title>
     <meta name="description" content="Post your AdvoCare 6 Car to Facebook.">
 
+    <link rel="icon" href="/favicon.png?r=31241" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 
-    <meta property="og:url" content="" />
-    <meta property="og:title" content="My AdvoCare 6 Car" />
+    <meta property="og:url" content="https://www.advocare6car.com" />
+    <meta property="og:title" content="6 My Ride" />
     <meta property="og:description" content="Post the AdvoCare 6 on your car and show your support for Trevor Bayne." />
   </head>
   <body ng-app="carApp">
+
+      <!--[if lt IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <noscript>  
+      &lt;p class="no-javascript"&gt;You need to have javascript enabled to view this page.&lt;/p&gt;
+    </noscript>
+
     <div class="main-container">
       <nav>
       </nav>
       <div class="content">
         <form ng-controller="FormController as formCtrl" 
-              name="canvasForm" 
+              name="canvasForm"
               novalidate
         >
-          <h1>
-            6 My Car
-          </h1>
+          <img class="imgHead" src="imgs/header.png">
           <canvas 
             id="carCanvas" 
             class="carCanvas"
@@ -36,14 +43,16 @@
             class="carCanvas"
             width="600" 
             height="auto"
-            ng-show="iOS && hasFile"
-            src="{{canvasDataURI}}"
+            ng-if="iOS && hasFile"
+            ng-src="{{canvasDataURI}}"
           / >
-          <h2
-            ng-show="iOS && hasFile"
+          <button
+            class="button rotate"
+            ng-click="rotate()"
+            ng-show="hasFile"
           >
-            Touch and hold to download, then share on facebook with #6car.
-          </h2>
+            {{text.rotate}}
+          </button>          
           <label 
             for="upload"
             class="button"
@@ -58,22 +67,48 @@
             style="display: none;" 
             required
           >
+          <textarea 
+            ng-model="text.message"
+            placeholder="{{text.placeholder}}"
+            rows="3"
+            ng-show="hasFile"
+          ></textarea>
+          <button 
+            id="fbShare" 
+            ng-click="fbShare()"
+            class="button"
+            ng-show="hasFile"
+          >
+            {{text.fbShareBtn}}
+          </button>
           <button 
             id="share" 
             ng-click="share()"
             class="button"
-            ng-hide="iOS"
+            ng-show="hasFile && !iOS"
           >
             {{text.shareBtn}}
           </button>
-
-          <img id="testImg" src="" />
+          <h2
+            ng-show="iOS && hasFile"
+          >
+            {{text.iMsg}}
+          </h2>
         </form>
       </div>
       <footer>
       </footer>
     </div>
-    <!--<script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.35.min.js"></script>-->
     <script src="bundle.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-73163641-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
   </body>
 </html>

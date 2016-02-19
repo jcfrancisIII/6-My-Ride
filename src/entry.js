@@ -6,8 +6,6 @@ require('./css/style.less')
 
 const app = angular.module('carApp', [])
 
-console.log('test app 187559058274258')
-
 // make the six image
 app.service('sixImage', function() {
   this.img = function(ctx) {
@@ -30,7 +28,7 @@ app.service('sixImage', function() {
     ctx.miterLimit = 4;
     ctx.save();
     ctx.save();
-    ctx.fillStyle = "#0a1971";
+    ctx.fillStyle = "#000";
     ctx.beginPath();
     ctx.moveTo(375.025,244.103);
     ctx.bezierCurveTo(374.69599999999997,243.983,374.368,243.868,374.037,243.75300000000001);
@@ -117,13 +115,15 @@ app.service('sixCanvas', function() {
   this.Width = document.getElementById('carCanvas').clientWidth
 })
 
+//console.log('fb id 101663366890281')
+
 app.run(['$window', 'sixImage', 
   function($window, sixImage) {
 
-  /* init facebook
+  /* init facebook */
   $window.fbAsyncInit = function() {
     FB.init({ 
-      appId: '187559058274258',
+      appId: '101663366890281',
       status: true, 
       cookie: true, 
       xfbml: true 
@@ -141,14 +141,21 @@ app.run(['$window', 'sixImage',
     js.src = "//connect.facebook.net/en_US/all.js";
     ref.parentNode.insertBefore(js, ref);
   }(document))
-  */
+  
 
   // draw random canvas
   var carC = document.getElementById("carCanvas")
   var ctx = carC.getContext("2d")
   ctx.fillStyle = 'white'
   ctx.fillRect(0, 0, carC.width, carC.height)
-  sixImage.img(ctx)
+  var ford = new Image()
+  
+  ford.addEventListener('load', function() {
+    ctx.drawImage(this, 0, 0, carC.width, carC.width)
+    sixImage.img(ctx)
+  })
+
+  ford.src = 'imgs/car.jpg'
 
 }])
 
@@ -168,16 +175,20 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
   
   $scope.text = {
     choose: 'Take or Upload Photo',
-    placeholder: 'Send your support for Trevor and add all the hashtags you can think of!',
-    shareBtn: 'Download and share on Facebook',
-    message: ''
+    placeholder: 'Send your support for Trevor with #6myride, #rfrdriven, and @AdvoCare!',
+    shareBtn: 'Save',
+    fbShareBtn: 'Share to Facebook',
+    message: '',
+    iMsg: 'Tap and hold the image to save.',
+    rotate: 'Rotate'
   }
 
   $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-  $log.log($scope.iOS)
-
   $scope.hasFile = false
+
+  //for iOS
+  $scope.savedImg = ''
   $scope.canvasDataURI = ''
 
   $scope.uploadFile = function(event){
@@ -207,6 +218,7 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
       var moreImgH = 0
 
       context.clearRect(0, 0, canW, canW)
+      context.save()
 
       if (imgW === imgH) {
         context.drawImage(this, 0, 0, canW, canW)
@@ -218,7 +230,13 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
         context.drawImage(this, 0, canW/2 - moreImgH/2, canW, moreImgH)
       }
 
+      // for iOS image
+      $scope.savedImg = canvas.toDataURL()
+
+      context.restore()
       sixImage.img(context)
+
+      // for iOS image
       $scope.canvasDataURI = canvas.toDataURL()
       $scope.$apply()
     })
@@ -230,6 +248,36 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
     if (files) {
       reader.readAsDataURL(files)
     }
+
+  }
+
+  //for iOS
+  $scope.rotate = function () {
+    var canvas = document.getElementById('carCanvas')
+    var context = canvas.getContext('2d')
+    var canW = canvas.width
+
+    var imageObj = new Image()
+
+    imageObj.addEventListener('load', function() {
+      context.clearRect(0, 0, canW, canW)
+      context.save()
+
+      context.translate(canW/2,canW/2);
+      context.rotate(90*Math.PI/180);
+      context.drawImage(this, -canW/2, -canW/2, canW, canW)
+
+      $scope.savedImg = canvas.toDataURL()
+
+      context.restore()
+      sixImage.img(context)
+
+      $scope.canvasDataURI = canvas.toDataURL()
+      $scope.$apply()
+
+    })
+
+    imageObj.src = $scope.savedImg
 
   }
 
@@ -266,9 +314,8 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
     })
   }
   */
-  /*
-  $scope.share = function(e) {
-    console.log($scope.canvas())
+  
+  $scope.fbShare = function(e) {
 
     if (!$scope.hasFile) {
       return false
@@ -279,11 +326,11 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
     FB.login(function(response){
       if (response.authResponse) {
         var accessToken = FB.getAuthResponse().accessToken
-        console.log('got access userid: ' + JSON.stringify(response.authResponse.userID) )
+        //console.log('got access userid: ' + JSON.stringify(response.authResponse.userID) )
 
         var thisID = response.authResponse.userID
 
-        PostImageToFacebook(newBlob, accessToken, thisID, $scope.message)
+        PostImageToFacebook(newBlob, accessToken, thisID, $scope.text.message)
 
       } else {
         console.log('failure to login')
@@ -296,19 +343,19 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
       fd.append('message', msg);
       fd.append('source', blob);
       try{
-        console.log('toekn: ' + JSON.stringify(authToken))
-        console.log(blob)
-        console.log('form data: ' + fd)
-        $http.post("https://graph.facebook.com/testspaceasdf/photos?access_token=" + authToken, fd,
+        //console.log('toekn: ' + JSON.stringify(authToken))
+        //console.log(blob)
+        //console.log('form data: ' + fd)
+        $http.post("https://graph.facebook.com/advocare/photos?access_token=" + authToken, fd,
           {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
           }).then(
             function(data) {
-              console.log('success data: ' + JSON.stringify(data))
+              //console.log('success data: ' + JSON.stringify(data))
             }, 
             function(data) {
-              console.log('failure data: ' + JSON.stringify(data))
+              //console.log('failure data: ' + JSON.stringify(data))
             }
           )
 
@@ -318,9 +365,9 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
     }
 
   } // end share function
-  */
+  
   $scope.share = function(e) {
-    console.log(fs)
+    //console.log(fs)
 
     if (!$scope.hasFile) {
       return false
@@ -328,7 +375,7 @@ app.controller('FormController', ['$scope', '$http', '$window', '$log', 'sixImag
 
     var newBlob = $scope.canvas()
 
-    fs.saveAs(newBlob, "my6car" + new Date().getTime() + ".png");
+    fs.saveAs(newBlob, "6myRIDE" + new Date().getTime() + ".png");
 
   }
 

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base build --inline --hot",
-    "build": "webpack && xcopy build\\index.html dist\\index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dist": "cross-env NODE_ENV=production webpack && xcopy build\\index.html dist\\index.html /Y && xcopy build\\imgs dist\\imgs /Y",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "env": "cross-env NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/jcfrancisIII/Portfolio-Angular",
   "devDependencies": {
     "autoprefixer": "^6.3.1",
+    "cross-env": "^1.0.7",
     "normalize.css": "^3.0.3",
     "postcss-loader": "^0.8.0",
     "precss": "^1.4.0"
